@@ -124,9 +124,11 @@ struct sieve_t<list_t<>> {
 };
 
 template <std::size_t N>
-constexpr auto primes = sieve_v<irange_v<2, N>>::values();
+constexpr auto sieve_primes() {
+  return sieve_v<irange_v<2, N>>::values();
+}
 
 int main() {
   constexpr int LIMIT = 100;  // no more than 1024 or the compiler will complain
-  std::println("{}", primes<LIMIT>);
+  std::println("{}", sieve_primes<LIMIT>());
 }
