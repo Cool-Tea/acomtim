@@ -89,17 +89,29 @@ auto parse_args(int argc, char* argv[]) -> Args {
   template for (constexpr auto member : nsdm_of(^^Args)) {
     constexpr auto type = std::meta::type_of(member);
     constexpr auto name = std::meta::identifier_of(member);
+    constexpr auto has_long = has_annotation<LongArg>(member);
+    constexpr auto has_short = has_annotation<ShortArg>(member);
 
     auto it = cmdline.end();
-    if constexpr (has_annotation<LongArg>(member)) {
-      it = std::ranges::find_if(cmdline, [&](std::string_view arg) {
-        return arg.starts_with("--") and arg.substr(2) == name;
-      });
+    if constexpr (has_long) {
+      if (it == cmdline.end()) {
+        it = std::ranges::find_if(cmdline, [&](std::string_view arg) {
+          return arg.starts_with("--") and arg.substr(2) == name;
+        });
+      } else {
+        std::println(stderr, "Duplicate option --{} and {}", name, *it);
+        std::exit(EXIT_FAILURE);
+      }
     }
-    if constexpr (has_annotation<ShortArg>(member)) {
-      it = std::ranges::find_if(cmdline, [&](std::string_view arg) {
-        return arg[0] == '-' and arg[1] == name[0];
-      });
+    if constexpr (has_short) {
+      if (it == cmdline.end()) {
+        it = std::ranges::find_if(cmdline, [&](std::string_view arg) {
+          return arg[0] == '-' and arg[1] == name[0];
+        });
+      } else {
+        std::println(stderr, "Duplicate option -{} and {}", name[0], *it);
+        std::exit(EXIT_FAILURE);
+      }
     }
 
     if constexpr (type == ^^bool) {
