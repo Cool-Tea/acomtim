@@ -25,7 +25,7 @@ Implement the sieve of Erathostenes, inspired by [http://cryp.to/prime-sieve/](h
 
 **NOTICE: THIS IMPLEMENTATION REQUIRES C++26 REFLECTION SUPPORT!!!**
 
-Implement the command line argument parser (or clap), inspired by [p3394](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3394r4.html#command-line-argument-parsing). However, due to the experimental feature of c++26, the implementation is not fully functional.
+Implement the command line argument parser (or clap), inspired by [p3394](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3394r4.html#command-line-argument-parsing).
 
 **Located at**: [clap.cpp](./src/clap.cpp)
 
