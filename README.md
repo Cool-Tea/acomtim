@@ -30,3 +30,13 @@ Implement the command line argument parser (or clap), inspired by [p3394](https:
 **Located at**: [clap.cpp](./src/clap.cpp)
 
 **Toolchain**: gcc 16.1.0
+
+## Serialization and Deserialization
+
+**NOTICE: THIS IMPLEMENTATION REQUIRES C++26 REFLECTION SUPPORT!!!**
+
+Implement the serialization and deserialization (or serde), inspired by [p3394](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3394r4.html#serialization).
+
+**Located at**: [serde.cpp](./src/serde.cpp)
+
+**Toolchain**: gcc 16.1.0
